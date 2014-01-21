@@ -5,7 +5,7 @@
         Title="MainWindow" Height="415" Width="632.8">
     <Grid Margin="0,0,3.6,0">
         <MediaElement x:Name="medPlayer" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="390" Margin="10,25,0,0" OpacityMask="Black" MediaOpened="medPlayer_MediaOpened"/>
-        <ToggleButton x:Name="PlayButton" Style="{StaticResource playpausebtn}" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="80" Width="80" Click="PlayButton_Click"/>
+        <ToggleButton x:Name="PlayButton" Style="{StaticResource playpausebtn}" Margin="10,0,0,10.2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="44" Width="48" Click="PlayButton_Click"/>
         <Button x:Name="BrbButton" Content="Backward" HorizontalAlignment="Left" Margin="70,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.819,0.444"/>
         <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="105,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
         <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-1.865,1.455"/>

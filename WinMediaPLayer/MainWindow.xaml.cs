@@ -68,6 +68,7 @@ namespace WinMediaPLayer
                 this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
                 this.medPlayer.Source = new Uri(file.FileName);
                 this.medPlayer.Play();
+                //PlayButton.IsChecked = true;
                 this.isPlaying = true;
                 this.medPlayer.Volume = 0.5;
             }
@@ -117,12 +118,12 @@ namespace WinMediaPLayer
             if (this.isPlaying)
             {
                 this.medPlayer.Pause();
-                PlayButton.Content = "Pause";
+                PlayButton.IsChecked = false;
                 this.isPlaying = false;
             }
             else if (this.medPlayer.Source != null) {
-                this.medPlayer.Play(); 
-                PlayButton.Content = "Play";
+                this.medPlayer.Play();
+                PlayButton.IsChecked = true;
                 this.isPlaying = true;
             }
             else
