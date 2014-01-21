@@ -8,9 +8,9 @@
         <ToggleButton x:Name="PlayButton" Style="{StaticResource playpausebtn}" Margin="10,0,0,10.2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="44" Width="48" Click="PlayButton_Click"/>
         <Button x:Name="BrbButton" Content="Backward" HorizontalAlignment="Left" Margin="70,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.819,0.444"/>
         <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="105,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
-        <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-1.865,1.455"/>
+        <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
         <Slider x:Name="SoundSlider" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="82" Margin="498,337,0,0" TickFrequency="0.5" Value="50" Background="Transparent" AutoToolTipPlacement="TopLeft" ToolTip="Volume Control" ValueChanged="SoundSlide_Click" Maximum="100" SmallChange="1" IsMoveToPointEnabled="True"/>
-        <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="594" Margin="0,0,-0.4,0" BorderThickness="0,0,0,1">
+        <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="623" Margin="0,0,-0.2,0" BorderThickness="0,0,0,1">
             <MenuItem Header="Menu" Height="25" Width="60">
                 <MenuItem Header="Ouvrir" HorizontalAlignment="Left" Width="144.8" Click="OpenButton_Click"/>
             </MenuItem>
@@ -23,6 +23,7 @@
             </MenuItem>
             <MenuItem Header="Options" Height="25" Width="60"/>
             <MenuItem Header="Aide" Height="25" Width="60"/>
+            <TextBox x:Name="rechercheField" Height="23" TextWrapping="Wrap" Text="Rechercher" Width="99" ToolTip="Rechercher dans la Bibliotheque" TouchEnter="validateSearch"/>
         </Menu>
         <Grid HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="38" Margin="575,25,0,0"/>
         <Slider x:Name="timeSlider"
@@ -40,7 +41,7 @@
                 <System:Double x:Key="myLargeChange">1</System:Double>
             </Slider.Resources>
         </Slider>
-        <ListBox x:Name="currentPlaylist" IsSynchronizedWithCurrentItem="True" Margin="405,25,52.8,69"/>
+        <ListBox x:Name="currentPlaylist" IsSynchronizedWithCurrentItem="True" Margin="405,25,52.8,69" Drop="dropElement" AllowDrop="True" Background="Transparent"/>
 
     </Grid>
 </Window>

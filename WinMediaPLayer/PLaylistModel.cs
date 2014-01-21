@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,11 @@ namespace WinMediaPLayer.Models
     class PlaylistModel
     {
         //Name, Filename
-        private List<String> playList;
+        private ObservableCollection<String> playList;
 
-        PlaylistModel()
+        public PlaylistModel()
         {
-            this.playList = new List<String>();
+            this.playList = new ObservableCollection<String>();
         }
 
         public void addElement(String filepath)
@@ -26,11 +27,13 @@ namespace WinMediaPLayer.Models
             this.playList.Remove(filepath);
         }
 
-        public List<String> getPlayList() {
+        public ObservableCollection<String> getPlayList()
+        {
             return this.playList;
         }
 
-        public void setPlayList(List<String> playlist) {
+        public void setPlayList(ObservableCollection<String> playlist)
+        {
             this.playList = playlist;
         }
     }

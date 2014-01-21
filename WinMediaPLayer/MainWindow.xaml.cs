@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using System.Windows.Threading;
+using WinMediaPLayer.Models;
 
 namespace WinMediaPLayer
 {
@@ -24,6 +25,7 @@ namespace WinMediaPLayer
     public partial class MainWindow : Window
     {
         private bool isPlaying = false;
+        private PlaylistModel currentList = new PlaylistModel();
 
         public MainWindow()
         {
@@ -130,6 +132,24 @@ namespace WinMediaPLayer
             {
                 OpenButton_Click(this, null);
             }
+        }
+
+        private void validateSearch(object sender, TouchEventArgs e)
+        {
+            // == Recherche ==
+        }
+
+        private void dropElement(object sender, DragEventArgs e)
+        {
+            String[] FileName = (String[])e.Data.GetData(System.Windows.Forms.DataFormats.FileDrop, true);
+            if (FileName.Length > 0)
+            {
+                String VideoPath = FileName[0].ToString();
+                MessageBox.Show(VideoPath);
+                this.currentList.addElement(VideoPath);
+                currentPlaylist.ItemsSource = this.currentList.getPlayList();
+            }
+            e.Handled = true;
         }
     }
 }
