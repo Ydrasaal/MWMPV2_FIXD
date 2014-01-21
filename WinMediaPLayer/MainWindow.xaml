@@ -1,39 +1,46 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WinMediaPLayer.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" x:Class="WinMediaPLayer.MainWindow"
         Title="MainWindow" Height="400" Width="632.8">
     <Grid Margin="0,0,3.6,0">
-        <MediaElement x:Name="medPLayer" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="390" Margin="10,25,0,0" OpacityMask="Black"/>
-        <Button Content="Play" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="10,332,0,0" Height="30"/>
-        <Button Content="Backward" HorizontalAlignment="Left" Margin="70,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.819,0.444"/>
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="105,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
-        <Button Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-1.865,1.455"/>
-        <ListBox HorizontalAlignment="Left" Height="278" Margin="405,25,0,0" VerticalAlignment="Top" Width="175"/>
-        <ProgressBar HorizontalAlignment="Left" Height="19" Margin="10,308,0,0" VerticalAlignment="Top" Width="570" ValueChanged="ProgressBar_Click" SmallChange="0.01">
-            <ProgressBar.Background>
-                <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                    <GradientStop Color="#FFBABABA"/>
-                    <GradientStop Color="#FFC7C7C7" Offset="0.5"/>
-                    <GradientStop Color="#FFBABABA" Offset="1"/>
-                </LinearGradientBrush>
-            </ProgressBar.Background>
-        </ProgressBar>
-        <Slider HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="82" Margin="498,337,0,0" TickFrequency="0.5" Value="5" Background="Transparent" AutoToolTipPlacement="TopLeft" ToolTip="Volume Control" ValueChanged="SoundSlide_Click"/>
+        <MediaElement x:Name="medPlayer" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="390" Margin="10,25,0,0" OpacityMask="Black" MediaOpened="medPlayer_MediaOpened"/>
+        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="10,332,0,0" Height="30" Click="PlayButton_Click"/>
+        <Button x:Name="BrbButton" Content="Backward" HorizontalAlignment="Left" Margin="70,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.819,0.444"/>
+        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="105,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
+        <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-1.865,1.455"/>
+        <Slider x:Name="SoundSlider" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="82" Margin="498,337,0,0" TickFrequency="0.5" Value="50" Background="Transparent" AutoToolTipPlacement="TopLeft" ToolTip="Volume Control" ValueChanged="SoundSlide_Click" Maximum="100" SmallChange="1" IsMoveToPointEnabled="True"/>
         <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="594" Margin="0,0,-0.4,0" BorderThickness="0,0,0,1">
             <MenuItem Header="Menu" Height="25" Width="60">
                 <MenuItem Header="Ouvrir" HorizontalAlignment="Left" Width="144.8" Click="OpenButton_Click"/>
             </MenuItem>
-            <MenuItem Header="Audio" Height="25" Width="60"/>
-            <MenuItem Header="Video" Height="25" Width="60"/>
+            <MenuItem Header="Media" Height="25" Width="60">
+                <MenuItem x:Name="AccelLecture" Header="Accelerer" Height="25" Width="150" Click="accelButton_Click"/>
+                <MenuItem x:Name="RalLecture" Header="Ralentir" Height="25" Width="150" Click="deccelButton_Click"/>
+            </MenuItem>
             <MenuItem Header="Playlists" Height="25" Width="60">
                 <MenuItem Header="New" Height="25" Width="60"/>
             </MenuItem>
             <MenuItem Header="Options" Height="25" Width="60"/>
             <MenuItem Header="Aide" Height="25" Width="60"/>
         </Menu>
-        <Grid HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="28" Margin="585,25,0,0">
-        </Grid>
+        <Grid HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="38" Margin="575,25,0,0"/>
+        <Slider x:Name="timeSlider"
+                Height="25" 
+                HorizontalAlignment="Left" 
+                Margin="10,308,0,0" 
+                VerticalAlignment="Top" 
+                Width="570" 
+                Maximum="100" 
+                SmallChange="0.01" 
+                ValueChanged="ProgressBar_ValueChanged" 
+                LargeChange="{DynamicResource myLargeChange}" 
+                IsMoveToPointEnabled="True">
+            <Slider.Resources>
+                <System:Double x:Key="myLargeChange">1</System:Double>
+            </Slider.Resources>
+        </Slider>
+        <ListBox x:Name="currentPlaylist" IsSynchronizedWithCurrentItem="True" Margin="405,25,52.8,69"/>
 
     </Grid>
 </Window>

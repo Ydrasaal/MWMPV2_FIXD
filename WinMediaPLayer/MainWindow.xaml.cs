@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.Windows.Threading;
 
 namespace WinMediaPLayer
 {
@@ -22,6 +23,8 @@ namespace WinMediaPLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isPlaying = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,11 +36,23 @@ namespace WinMediaPLayer
         }
 
         private void SoundSlide_Click(object sender, RoutedEventArgs eve) {
-            this.medPLayer.Volume = ((Slider)sender).Value;
+            this.medPlayer.Volume = ((Slider)sender).Value / 100;
+            //MessageBox.Show(((Slider)sender).Value.ToString());
         }
 
-        private void ProgressBar_Click(object sender, RoutedEventArgs eve)
+        private void ProgressBar_ValueChanged(object sender, RoutedEventArgs eve)
         {
+            if (this.isPlaying)
+            {
+                if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
+                {
+                    this.medPlayer.Position = TimeSpan.FromSeconds(this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds * (((Slider)sender).Value / 100));
+                }
+            }
+            else
+            {
+                ((Slider)sender).Value = 0;
+            }
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -50,17 +65,69 @@ namespace WinMediaPLayer
 
             if (file.ShowDialog() == true)
             {
-                this.medPLayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
-                this.medPLayer.Source = new Uri(file.FileName);
-                //wmp.PlayStateChange += new WMPLib._WMPOCXEvents_PlayStateChangeEventHandler(Player_PlayStateChange);
-                //wmp.MediaError +=
-                //    new WMPLib._WMPOCXEvents_MediaErrorEventHandler(Player_MediaError);
-                this.medPLayer.Play();
-                this.medPLayer.Volume = 50;
-                //wmp.URL = file.FileName;
-                //wmp.settings.volume = 50;
-                //wmp.controls.play();
-                //playButton.Text = "Pause";
+                this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
+                this.medPlayer.Source = new Uri(file.FileName);
+                this.medPlayer.Play();
+                this.isPlaying = true;
+                this.medPlayer.Volume = 0.5;
+            }
+        }
+
+        private void medPlayer_MediaOpened(object sender, EventArgs e)
+        {
+            var timerTime = new DispatcherTimer();
+            timerTime.Interval = TimeSpan.FromSeconds(1);
+            timerTime.Tick += new EventHandler(timer_Tick);
+            timerTime.Start();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            var TotalTime = this.medPlayer.NaturalDuration.TimeSpan;
+            if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
+            {
+                if (TotalTime.TotalSeconds > 0)
+                {
+                    timeSlider.Value = (this.medPlayer.Position.TotalSeconds /
+                                       TotalTime.TotalSeconds) * 100;
+                    //MessageBox.Show((this.medPlayer.Position.TotalSeconds / TotalTime.TotalSeconds).ToString());
+
+                }
+            }
+        }
+
+        private void accelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isPlaying)
+            {
+                this.medPlayer.SpeedRatio += (this.medPlayer.SpeedRatio / 2);
+            }
+        }
+
+        private void deccelButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isPlaying)
+            {
+                this.medPlayer.SpeedRatio -= (this.medPlayer.SpeedRatio / 2);
+            }
+        }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isPlaying)
+            {
+                this.medPlayer.Pause();
+                PlayButton.Content = "Pause";
+                this.isPlaying = false;
+            }
+            else if (this.medPlayer.Source != null) {
+                this.medPlayer.Play(); 
+                PlayButton.Content = "Play";
+                this.isPlaying = true;
+            }
+            else
+            {
+                OpenButton_Click(this, null);
             }
         }
     }
