@@ -42,7 +42,7 @@ namespace WinMediaPLayer
 
         private void ProgressBar_ValueChanged(object sender, RoutedEventArgs eve)
         {
-            if (this.isPlaying)
+            if (this.medPlayer.Source != null)
             {
                 if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
                 {
