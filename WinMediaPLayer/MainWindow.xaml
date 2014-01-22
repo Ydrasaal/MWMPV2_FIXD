@@ -241,7 +241,7 @@
                     VerticalAlignment="Top"
                     Width="40"
                     Height="40"
-                    Margin="10"
+                    Margin="3"
                     ToolTip="Ajouter élément"
                     Click="AddButton_Click"
                     Grid.Column="1"
@@ -253,12 +253,28 @@
             </Button.Template>
         </Button>
 
+        <Button x:Name="SubButton"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom"
+                    Width="40"
+                    Height="40"
+                    Margin="3"
+                    ToolTip="Retirer élément"
+                    Grid.Column="1"
+                    Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="Resources/remove.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
         <Button x:Name="SaveButton"
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Top"
                     Width="40"
                     Height="40"
-                    Margin="10"
+                    Margin="5"
                     ToolTip="Sauvegarder playlist"
                     Click="SaveButton_Click"
                     Grid.Column="1"
