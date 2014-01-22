@@ -76,7 +76,7 @@
                         Margin="10,25,0,0"
                         OpacityMask="Black"
                         MediaOpened="medPlayer_MediaOpened"
-                        Grid.Column="0"/>
+                        Grid.Column="0" MediaEnded="medPlayer_MediaEnded"/>
 
         <Grid Height="80" VerticalAlignment="Bottom" Margin="5" Grid.Row="2">
             <Grid.ColumnDefinitions>

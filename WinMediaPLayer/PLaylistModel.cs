@@ -80,6 +80,12 @@ namespace WinMediaPLayer.Models
             }
         }
 
+        public int getIndex(string fileName)
+        {
+            int index = this.getNameList().IndexOf(fileName);
+            return index;
+        }
+
         internal void flush()
         {
             this.playList.Clear();
