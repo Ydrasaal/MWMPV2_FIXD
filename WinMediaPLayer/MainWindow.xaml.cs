@@ -101,6 +101,7 @@ namespace WinMediaPLayer
             {
                 if (file.FileName.Length > 0)
                 {
+                    MessageBox.Show(file.FileName);
                     this.currentList.addElement(file.FileName);
                     currentPlaylist.ItemsSource = this.currentList.getNameList();
                 }
@@ -183,6 +184,7 @@ namespace WinMediaPLayer
             if (FileName.Length > 0)
             {
                 String VideoPath = FileName[0].ToString();
+                MessageBox.Show(VideoPath);
                 this.currentList.addElement(VideoPath);
                 currentPlaylist.ItemsSource = this.currentList.getNameList();
             }
@@ -221,6 +223,7 @@ namespace WinMediaPLayer
             {
                 if (file.FileName.Length > 0)
                 {
+                    MessageBox.Show(file.FileName);
                     this.currentList.addElement(file.FileName);
                     currentPlaylist.ItemsSource = this.currentList.getNameList();
                 }
@@ -231,6 +234,7 @@ namespace WinMediaPLayer
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             String currentPath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+            MessageBox.Show(currentPath);
             File.WriteAllLines(currentPath + @"\currentPlaylist.txt", this.currentList.getPlayList(), Encoding.UTF8);
         }
 
@@ -303,10 +307,6 @@ namespace WinMediaPLayer
                     this.isPlaying = false;
                 }
             }
-        }
-
-        private void medPlayer_MediaEnded(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
