@@ -63,7 +63,6 @@
                           Height="25"
                           Width="Auto"/>
             </MenuItem>
-            <MenuItem Header="Options" Height="25" Width="Auto"/>
             <MenuItem Header="?" Height="25" Width="Auto">
                 <MenuItem x:Name="help"
                               Header="Aide"
@@ -228,12 +227,25 @@
 
         </Grid>
 
+        <TextBlock Height="25"
+                   Width="200"
+                   VerticalAlignment="Top"
+                   Grid.Column="1"
+                   Foreground="White">
+            <TextBlock.Background>
+                <ImageBrush x:Name="plTBgImage" ImageSource="Resources/playlist.png"/>
+            </TextBlock.Background>
+        </TextBlock>
+
         <ListBox x:Name="currentPlaylist"
-                 Margin="5" Width="100"
+                 Margin="5,30,0,0"
+                 Width="200"
                  IsSynchronizedWithCurrentItem="True"
                  Drop="dropElement"
                  AllowDrop="True"
-                 Grid.Column="1" MouseDoubleClick="currentPlaylist_MouseDoubleClick">
+                 Grid.Column="1"
+                 Foreground="White"
+                 MouseDoubleClick="currentPlaylist_MouseDoubleClick">
             <ListBox.Background>
                 <ImageBrush x:Name="plBgImage" ImageSource="Resources/playlist.png"/>
             </ListBox.Background>

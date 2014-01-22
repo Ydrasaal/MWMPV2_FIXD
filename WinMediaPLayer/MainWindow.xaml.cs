@@ -167,7 +167,7 @@ namespace WinMediaPLayer
         {
             if (this.medPlayer.Source != null)
             {
-                if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
+                if (this.medPlayer.NaturalDuration.HasTimeSpan && this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
                 {
                     this.medPlayer.Position = TimeSpan.FromSeconds(this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds * (((Slider)sender).Value / 100));
                 }
