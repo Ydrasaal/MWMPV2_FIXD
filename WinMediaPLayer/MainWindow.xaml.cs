@@ -151,5 +151,15 @@ namespace WinMediaPLayer
             }
             e.Handled = true;
         }
+
+        private void SoundSlide_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

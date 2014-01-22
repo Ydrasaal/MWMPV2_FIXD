@@ -1,11 +1,14 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" x:Class="WinMediaPLayer.MainWindow"
-        MinWidth="800"
+        MinWidth="820"
         MinHeight="600"
         Title="MainWindow" Height="Auto" Width="Auto">
 
-    <Grid Background="Black" MinWidth="800">
+    <Grid MinWidth="800">
+        <Grid.Background>
+            <ImageBrush x:Name="bgImage" ImageSource="Resources/bg.png"/>
+        </Grid.Background>
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,10 +17,9 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*" MinHeight="300"/>
-            <RowDefinition Height="45"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Menu Height="25" VerticalAlignment="Top" Width="Auto" BorderThickness="0,1,0,1">
             <MenuItem Header="Menu" Height="25" Width="Auto">
                 <MenuItem Header="Ouvrir"
@@ -26,37 +28,144 @@
                           Click="OpenButton_Click"/>
             </MenuItem>
             <MenuItem Header="Media" Height="25" Width="Auto">
-                <MenuItem x:Name="AccelLecture"
-                          Header="Accelerer"
-                          Height="25"
-                          Width="150"
-                          Click="accelButton_Click"/>
                 <MenuItem x:Name="RalLecture"
-                          Header="Ralentir"
+                          Header="Ralentir lecture"
                           Height="25"
-                          Width="150"
+                          Width="Auto"
                           Click="deccelButton_Click"/>
+                <MenuItem x:Name="AccelLecture"
+                          Header="Accélérer lecture"
+                          Height="25"
+                          Width="Auto"
+                          Click="accelButton_Click"/>
+                <MenuItem x:Name="UpVolume"
+                          Header="Monter son"
+                          Height="25"
+                          Width="Auto"/>
+                <MenuItem x:Name="LowVolume"
+                          Header="Baisser son"
+                          Height="25"
+                          Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Playlists" Height="25" Width="Auto">
-                <MenuItem Header="New"
+                <MenuItem x:Name="newPlaylist"
+                          Header="Nouvelle playlist"
                           Height="25"
-                          Width="60"/>
+                          Width="Auto"/>
+                <MenuItem x:Name="loadPlaylist"
+                          Header="Charger une playlist"
+                          Height="25"
+                          Width="Auto"/>
+                <MenuItem x:Name="savePlaylist"
+                          Header="Sauvegarder la playlist actuelle"
+                          Height="25"
+                          Width="Auto"/>
             </MenuItem>
             <MenuItem Header="Options" Height="25" Width="Auto"/>
-            <MenuItem Header="Aide" Height="25" Width="Auto"/>
+            <MenuItem Header="?" Height="25" Width="Auto">
+                <MenuItem x:Name="help"
+                              Header="Aide"
+                              Height="25"
+                              Width="Auto"/>
+                <MenuItem x:Name="about"
+                              Header="A propos"
+                              Height="25"
+                              Width="Auto"/>
+            </MenuItem>
         </Menu>
 
         <MediaElement x:Name="medPlayer"
-                      HorizontalAlignment="Left"
-                      Height="Auto"
-                      Width="Auto"
-                      VerticalAlignment="Top"
-                      Margin="10,25,0,0"
-                      OpacityMask="Black"
-                      MediaOpened="medPlayer_MediaOpened"
-                      Grid.Column="0"/>
+                        HorizontalAlignment="Left"
+                        Height="Auto"
+                        Width="Auto"
+                        VerticalAlignment="Top"
+                        Margin="10,25,0,0"
+                        OpacityMask="Black"
+                        MediaOpened="medPlayer_MediaOpened"
+                        Grid.Column="0"/>
 
-        <Slider x:Name="timeSlider"
+        <Grid Height="80" VerticalAlignment="Bottom" Margin="5" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <ToggleButton x:Name="PlayButton"
+                          Style="{StaticResource playpausebtn}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60"
+                          Width="60"
+                          ToolTip="Lecture/Pause"
+                          Click="PlayButton_Click"
+                          Grid.Column="0"/>
+            
+            <Button x:Name="BrbButton"
+                    Width="50"
+                    Height="50"
+                    Margin="20,5,1,5"
+                    ToolTip="Piste précédente"
+                    Grid.Column="1">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/previous.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <Button x:Name="StopButton"
+                    Content="Stop"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="50"
+                    Height="50"
+                    ToolTip="Stop"
+                    Grid.Column="2">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/stop.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <Button x:Name="ForwardButton"
+                    Content="Forward"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="50"
+                    Height="50"
+                    ToolTip="Piste suivante"
+                    Margin="1,5,0,5"
+                    Grid.Column="3">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/next.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Button x:Name="SlowButton"
+                    Content="Forward"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top"
+                    Width="40"
+                    Height="40"
+                    ToolTip="Ralentir"
+                    Click="deccelButton_Click"
+                    Grid.Column="4">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/slow.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Slider x:Name="timeSlider"
                 Margin="10"
                 Height="25" 
                 VerticalAlignment="Top" 
@@ -66,83 +175,101 @@
                 ValueChanged="ProgressBar_ValueChanged" 
                 LargeChange="{DynamicResource myLargeChange}" 
                 IsMoveToPointEnabled="True"
-                Grid.Row="1">
-            <Slider.Resources>
-                <System:Double x:Key="myLargeChange">1</System:Double>
-            </Slider.Resources>
-        </Slider>
+                Grid.Column="5">
+                <Slider.Resources>
+                    <System:Double x:Key="myLargeChange">1</System:Double>
+                </Slider.Resources>
+            </Slider>
+            
+            <Image
+                Source="Resources/volume.png"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="10"
+                Height="20"
+                Width="20"
+                Grid.Column="5" />
 
-        <Grid Height="80" VerticalAlignment="Bottom" Margin="5" Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            
-            <ToggleButton x:Name="PlayButton"
-                          Style="{StaticResource playpausebtn}"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"
-                          Height="60"
-                          Width="60"
-                          Click="PlayButton_Click"
-                          Grid.Column="0"/>
-            
-            <Button x:Name="BrbButton" Width="50" Height="50" Grid.Column="1">
+            <Slider x:Name="SoundSlider"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Height="25"
+                Width="100"
+                Margin="30,0,0,6"
+                TickFrequency="0.5"
+                Value="50"
+                Background="Transparent"
+                AutoToolTipPlacement="TopLeft"
+                ToolTip="Volume"
+                ValueChanged="SoundSlide_Click"
+                Maximum="100"
+                SmallChange="1"
+                IsMoveToPointEnabled="True"
+                Grid.Column="5"/>
+
+            <Button x:Name="AccelerateButton"
+                    Content="Forward"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Width="40"
+                    Height="40"
+                    ToolTip="Accélérer"
+                    Click="accelButton_Click"
+                    Grid.Column="6">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image Source="Resources/previous.png"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            
-            <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="50" Height="50" Grid.Column="2">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Source="Resources/stop.png"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            
-            <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="50" Height="50" Grid.Column="3">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Source="Resources/next.png"/>
+                        <Image Source="Resources/fast.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
 
         </Grid>
 
-        <Slider x:Name="SoundSlider"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Height="25"
-                Width="82"
-                Margin="498,337,0,0"
-                TickFrequency="0.5"
-                Value="50"
-                Background="Transparent"
-                AutoToolTipPlacement="TopLeft"
-                ToolTip="Volume Control"
-                ValueChanged="SoundSlide_Click"
-                Maximum="100"
-                SmallChange="1"
-                IsMoveToPointEnabled="True"
-                Grid.Row="1"/>
-
-
-
-
-
         <ListBox x:Name="currentPlaylist"
                  Margin="5" Width="100"
                  IsSynchronizedWithCurrentItem="True"
                  Drop="dropElement"
                  AllowDrop="True"
-                 Background="Red"
-                 Grid.Column="1"/>
+                 Grid.Column="1">
+            <ListBox.Background>
+                <ImageBrush x:Name="plBgImage" ImageSource="Resources/playlist.png"/>
+            </ListBox.Background>
+        </ListBox>
+
+        <Button x:Name="AddButton"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    ToolTip="Ajouter élément"
+                    Click="deccelButton_Click"
+                    Grid.Column="1"
+                    Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="Resources/add.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Button x:Name="SaveButton"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top"
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    ToolTip="Sauvegarder playlist"
+                    Click="deccelButton_Click"
+                    Grid.Column="1"
+                    Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate>
+                    <Image Source="Resources/save.png"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
 
     </Grid>
 

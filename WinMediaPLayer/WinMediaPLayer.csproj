@@ -114,6 +114,24 @@
   <ItemGroup>
     <Resource Include="Resources\pause.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\fast.png" />
+    <Resource Include="Resources\slow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add.png" />
+    <Resource Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bg.png" />
+    <Resource Include="Resources\playlist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\thumb.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
