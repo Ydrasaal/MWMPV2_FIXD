@@ -58,6 +58,7 @@ namespace WinMediaPLayer
             {
                 list.Add(s);
             }
+            lib.ItemsSource = list;
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
@@ -307,6 +308,18 @@ namespace WinMediaPLayer
                     this.isPlaying = false;
                 }
             }
+        }
+
+        private void lib_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            String tmp = (String)((ListBox)sender).SelectedItem;
+            this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
+            this.medPlayer.Source = new Uri(tmp);
+            this.medPlayer.SpeedRatio = 1;
+            this.medPlayer.Play();
+            this.isPlaying = true;
+            this.PlayButton.IsChecked = true;
+            this.medPlayer.Volume = 0.5;
         }
     }
 }
