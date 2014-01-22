@@ -39,7 +39,6 @@ namespace WinMediaPLayer
 
         private void SoundSlide_Click(object sender, RoutedEventArgs eve) {
             this.medPlayer.Volume = ((Slider)sender).Value / 100;
-            //MessageBox.Show(((Slider)sender).Value.ToString());
         }
 
         private void ProgressBar_ValueChanged(object sender, RoutedEventArgs eve)
@@ -61,12 +60,18 @@ namespace WinMediaPLayer
         {
             OpenFileDialog file = new OpenFileDialog();
             file.InitialDirectory = "c:\\";
-            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.wmv";
+            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv";
             file.FilterIndex = 2;
             file.RestoreDirectory = true;
 
             if (file.ShowDialog() == true)
             {
+                if (file.FileName.Length > 0)
+                {
+                    MessageBox.Show(file.FileName);
+                    this.currentList.addElement(file.FileName);
+                    currentPlaylist.ItemsSource = this.currentList.getNameList();
+                }
                 this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
                 this.medPlayer.Source = new Uri(file.FileName);
                 this.medPlayer.Play();
@@ -86,15 +91,16 @@ namespace WinMediaPLayer
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            var TotalTime = this.medPlayer.NaturalDuration.TimeSpan;
-            if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
+            if (this.medPlayer.NaturalDuration.HasTimeSpan)
             {
-                if (TotalTime.TotalSeconds > 0)
+                var TotalTime = this.medPlayer.NaturalDuration.TimeSpan;
+                if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
                 {
-                    timeSlider.Value = (this.medPlayer.Position.TotalSeconds /
-                                       TotalTime.TotalSeconds) * 100;
-                    //MessageBox.Show((this.medPlayer.Position.TotalSeconds / TotalTime.TotalSeconds).ToString());
-
+                    if (TotalTime.TotalSeconds > 0)
+                    {
+                        timeSlider.Value = (this.medPlayer.Position.TotalSeconds /
+                                           TotalTime.TotalSeconds) * 100;
+                    }
                 }
             }
         }
@@ -147,17 +153,62 @@ namespace WinMediaPLayer
                 String VideoPath = FileName[0].ToString();
                 MessageBox.Show(VideoPath);
                 this.currentList.addElement(VideoPath);
-                currentPlaylist.ItemsSource = this.currentList.getPlayList();
+                currentPlaylist.ItemsSource = this.currentList.getNameList();
             }
             e.Handled = true;
         }
 
         private void SoundSlide_Click(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            this.medPlayer.Volume = ((Slider)sender).Value / 100;
         }
 
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (this.medPlayer.Source != null)
+            {
+                if (this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds > 0)
+                {
+                    this.medPlayer.Position = TimeSpan.FromSeconds(this.medPlayer.NaturalDuration.TimeSpan.TotalSeconds * (((Slider)sender).Value / 100));
+                }
+            }
+            else
+            {
+                ((Slider)sender).Value = 0;
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.InitialDirectory = "c:\\";
+            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv";
+            file.FilterIndex = 2;
+            file.RestoreDirectory = true;
+
+            if (file.ShowDialog() == true)
+            {
+                if (file.FileName.Length > 0)
+                {
+                    MessageBox.Show(file.FileName);
+                    this.currentList.addElement(file.FileName);
+                    currentPlaylist.ItemsSource = this.currentList.getNameList();
+                }
+                e.Handled = true;
+            }
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RawUpSoundButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RawDownSoundButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
