@@ -200,7 +200,9 @@ namespace WinMediaPLayer
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            File.WriteAllLines(".pli", this.currentList.getPlayList());
+            String currentPath = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
+            MessageBox.Show(currentPath);
+            File.WriteAllLines(currentPath + @"\currentPlaylist.txt", this.currentList.getPlayList(), Encoding.UTF8);
         }
 
         private void currentPlaylist_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -211,6 +213,7 @@ namespace WinMediaPLayer
             this.medPlayer.SpeedRatio = 1;
             this.medPlayer.Play();
             this.isPlaying = true;
+            this.PlayButton.IsChecked = true;
             this.medPlayer.Volume = 0.5;
         }
 
@@ -239,6 +242,37 @@ namespace WinMediaPLayer
             if (this.medPlayer.Volume > 0.05)
             {
                 this.medPlayer.Volume = 0.05;
+            }
+        }
+
+        private void SubButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.currentPlaylist.SelectedItem != null)
+            {
+                String tmp = this.currentPlaylist.SelectedItem.ToString();
+                this.currentList.removeByName(tmp);
+                currentPlaylist.ItemsSource = this.currentList.getNameList();
+                if (this.isPlaying)
+                {
+                    this.medPlayer.Stop();
+                    PlayButton.IsChecked = false;
+                    this.isPlaying = false;
+                }
+            }
+        }
+
+        private void newPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.currentPlaylist.SelectedItem != null)
+            {
+                this.currentList.flush();
+                currentPlaylist.ItemsSource = null;
+                if (this.isPlaying)
+                {
+                    this.medPlayer.Stop();
+                    PlayButton.IsChecked = false;
+                    this.isPlaying = false;
+                }
             }
         }
     }

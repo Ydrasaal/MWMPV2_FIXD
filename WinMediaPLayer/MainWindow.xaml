@@ -53,7 +53,8 @@
                 <MenuItem x:Name="newPlaylist"
                           Header="Nouvelle playlist"
                           Height="25"
-                          Width="Auto"/>
+                          Width="Auto"
+                          Click="newPlaylist_Click"/>
                 <MenuItem x:Name="loadPlaylist"
                           Header="Charger une playlist"
                           Height="25"
@@ -61,7 +62,8 @@
                 <MenuItem x:Name="savePlaylist"
                           Header="Sauvegarder la playlist actuelle"
                           Height="25"
-                          Width="Auto"/>
+                          Width="Auto"
+                          Click="SaveButton_Click"/>
             </MenuItem>
             <MenuItem Header="Options" Height="25" Width="Auto"/>
             <MenuItem Header="?" Height="25" Width="Auto">
@@ -264,7 +266,8 @@
                     Margin="3"
                     ToolTip="Retirer élément"
                     Grid.Column="1"
-                    Grid.Row="1">
+                    Grid.Row="1"
+                    Click="SubButton_Click">
             <Button.Template>
                 <ControlTemplate>
                     <Image Source="Resources/remove.png"/>

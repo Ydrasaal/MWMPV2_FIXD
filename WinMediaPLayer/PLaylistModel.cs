@@ -5,12 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace WinMediaPLayer.Models
 {
     class PlaylistModel
     {
         //Name, Filename
+        private String plName = null;
         private ObservableCollection<String> playList;
 
         public PlaylistModel()
@@ -53,6 +55,34 @@ namespace WinMediaPLayer.Models
             int index = this.getNameList().IndexOf(fileName);
             String tmp = this.playList[index];
             return tmp;
+        }
+
+        public String getPlName()
+        {
+            return this.plName;
+        }
+
+        public void setPlName(String name)
+        {
+            this.plName = name;
+        }
+
+        internal void removeByName(string fileName)
+        {
+            int index = this.getNameList().IndexOf(fileName);
+            MessageBox.Show(index.ToString());
+            if (plName != null)
+            {
+                this.plName.Remove(index, 1);
+            }
+            if (playList != null) {
+                this.playList.RemoveAt(index);
+            }
+        }
+
+        internal void flush()
+        {
+            this.playList.Clear();
         }
     }
 }
