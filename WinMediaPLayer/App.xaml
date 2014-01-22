@@ -41,7 +41,7 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <Image x:Name="play" Stretch="Fill" Source="Resources/play.png"/>
-                            <Image x:Name="pause"  Stretch="Fill" Source="Resources/stop.png"/>
+                            <Image x:Name="pause"  Stretch="Fill" Source="Resources/pause.png"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

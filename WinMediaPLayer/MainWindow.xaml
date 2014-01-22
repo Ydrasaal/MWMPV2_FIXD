@@ -1,47 +1,149 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:System="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" x:Class="WinMediaPLayer.MainWindow"
-        Title="MainWindow" Height="415" Width="632.8">
-    <Grid Margin="0,0,3.6,0">
-        <MediaElement x:Name="medPlayer" HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="390" Margin="10,25,0,0" OpacityMask="Black" MediaOpened="medPlayer_MediaOpened"/>
-        <ToggleButton x:Name="PlayButton" Style="{StaticResource playpausebtn}" Margin="10,0,0,10.2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="44" Width="48" Click="PlayButton_Click"/>
-        <Button x:Name="BrbButton" Content="Backward" HorizontalAlignment="Left" Margin="70,342,0,0" VerticalAlignment="Top" Width="30" Height="20" RenderTransformOrigin="-0.819,0.444"/>
-        <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Left" Margin="105,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
-        <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Left" Margin="140,342,0,0" VerticalAlignment="Top" Width="30" Height="20"/>
-        <Slider x:Name="SoundSlider" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="82" Margin="498,337,0,0" TickFrequency="0.5" Value="50" Background="Transparent" AutoToolTipPlacement="TopLeft" ToolTip="Volume Control" ValueChanged="SoundSlide_Click" Maximum="100" SmallChange="1" IsMoveToPointEnabled="True"/>
-        <Menu HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="623" Margin="0,0,-0.2,0" BorderThickness="0,0,0,1">
-            <MenuItem Header="Menu" Height="25" Width="60">
-                <MenuItem Header="Ouvrir" HorizontalAlignment="Left" Width="144.8" Click="OpenButton_Click"/>
+        MinWidth="800"
+        MinHeight="600"
+        Title="MainWindow" Height="Auto" Width="Auto">
+
+    <Grid Background="Black" MinWidth="800">
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="300"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Height="25" VerticalAlignment="Top" Width="Auto" BorderThickness="0,1,0,1">
+            <MenuItem Header="Menu" Height="25" Width="Auto">
+                <MenuItem Header="Ouvrir"
+                          HorizontalAlignment="Left"
+                          Width="144.8"
+                          Click="OpenButton_Click"/>
             </MenuItem>
-            <MenuItem Header="Media" Height="25" Width="60">
-                <MenuItem x:Name="AccelLecture" Header="Accelerer" Height="25" Width="150" Click="accelButton_Click"/>
-                <MenuItem x:Name="RalLecture" Header="Ralentir" Height="25" Width="150" Click="deccelButton_Click"/>
+            <MenuItem Header="Media" Height="25" Width="Auto">
+                <MenuItem x:Name="AccelLecture"
+                          Header="Accelerer"
+                          Height="25"
+                          Width="150"
+                          Click="accelButton_Click"/>
+                <MenuItem x:Name="RalLecture"
+                          Header="Ralentir"
+                          Height="25"
+                          Width="150"
+                          Click="deccelButton_Click"/>
             </MenuItem>
-            <MenuItem Header="Playlists" Height="25" Width="60">
-                <MenuItem Header="New" Height="25" Width="60"/>
+            <MenuItem Header="Playlists" Height="25" Width="Auto">
+                <MenuItem Header="New"
+                          Height="25"
+                          Width="60"/>
             </MenuItem>
-            <MenuItem Header="Options" Height="25" Width="60"/>
-            <MenuItem Header="Aide" Height="25" Width="60"/>
-            <TextBox x:Name="rechercheField" Height="23" TextWrapping="Wrap" Text="Rechercher" Width="99" ToolTip="Rechercher dans la Bibliotheque" TouchEnter="validateSearch"/>
+            <MenuItem Header="Options" Height="25" Width="Auto"/>
+            <MenuItem Header="Aide" Height="25" Width="Auto"/>
         </Menu>
-        <Grid HorizontalAlignment="Left" Height="278" VerticalAlignment="Top" Width="38" Margin="575,25,0,0"/>
+
+        <MediaElement x:Name="medPlayer"
+                      HorizontalAlignment="Left"
+                      Height="Auto"
+                      Width="Auto"
+                      VerticalAlignment="Top"
+                      Margin="10,25,0,0"
+                      OpacityMask="Black"
+                      MediaOpened="medPlayer_MediaOpened"
+                      Grid.Column="0"/>
+
         <Slider x:Name="timeSlider"
+                Margin="10"
                 Height="25" 
-                HorizontalAlignment="Left" 
-                Margin="10,308,0,0" 
                 VerticalAlignment="Top" 
-                Width="570" 
+                Width="Auto"
                 Maximum="100" 
                 SmallChange="0.01" 
                 ValueChanged="ProgressBar_ValueChanged" 
                 LargeChange="{DynamicResource myLargeChange}" 
-                IsMoveToPointEnabled="True">
+                IsMoveToPointEnabled="True"
+                Grid.Row="1">
             <Slider.Resources>
                 <System:Double x:Key="myLargeChange">1</System:Double>
             </Slider.Resources>
         </Slider>
-        <ListBox x:Name="currentPlaylist" IsSynchronizedWithCurrentItem="True" Margin="405,25,52.8,69" Drop="dropElement" AllowDrop="True" Background="Transparent"/>
+
+        <Grid Height="80" VerticalAlignment="Bottom" Margin="5" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <ToggleButton x:Name="PlayButton"
+                          Style="{StaticResource playpausebtn}"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Height="60"
+                          Width="60"
+                          Click="PlayButton_Click"
+                          Grid.Column="0"/>
+            
+            <Button x:Name="BrbButton" Width="50" Height="50" Grid.Column="1">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/previous.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <Button x:Name="StopButton" Content="Stop" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="50" Height="50" Grid.Column="2">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/stop.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            
+            <Button x:Name="ForwardButton" Content="Forward" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="50" Height="50" Grid.Column="3">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="Resources/next.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </Grid>
+
+        <Slider x:Name="SoundSlider"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="25"
+                Width="82"
+                Margin="498,337,0,0"
+                TickFrequency="0.5"
+                Value="50"
+                Background="Transparent"
+                AutoToolTipPlacement="TopLeft"
+                ToolTip="Volume Control"
+                ValueChanged="SoundSlide_Click"
+                Maximum="100"
+                SmallChange="1"
+                IsMoveToPointEnabled="True"
+                Grid.Row="1"/>
+
+
+
+
+
+        <ListBox x:Name="currentPlaylist"
+                 Margin="5" Width="100"
+                 IsSynchronizedWithCurrentItem="True"
+                 Drop="dropElement"
+                 AllowDrop="True"
+                 Background="Red"
+                 Grid.Column="1"/>
 
     </Grid>
+
 </Window>
