@@ -60,7 +60,7 @@ namespace WinMediaPLayer
         {
             OpenFileDialog file = new OpenFileDialog();
             file.InitialDirectory = "c:\\";
-            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv";
+            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv;*.jpg;*.png;*.jpeg;";
             file.FilterIndex = 2;
             file.RestoreDirectory = true;
 
@@ -74,8 +74,8 @@ namespace WinMediaPLayer
                 }
                 this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
                 this.medPlayer.Source = new Uri(file.FileName);
+                this.medPlayer.SpeedRatio = 1;
                 this.medPlayer.Play();
-                //PlayButton.IsChecked = true;
                 this.isPlaying = true;
                 this.medPlayer.Volume = 0.5;
             }
@@ -182,7 +182,7 @@ namespace WinMediaPLayer
         {
             OpenFileDialog file = new OpenFileDialog();
             file.InitialDirectory = "c:\\";
-            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv";
+            file.Filter = "Media Files (*.wav)|*.mpg;*.avi;*.wma;*.mov;*.wav;*.mp2;*.mp3;*.mp4;*.wmv;*.jpg;*.png;*.jpeg;";
             file.FilterIndex = 2;
             file.RestoreDirectory = true;
 
@@ -211,6 +211,17 @@ namespace WinMediaPLayer
         private void RawDownSoundButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void currentPlaylist_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            String tmp = (String) ((ListBox) sender).SelectedItem;
+            this.medPlayer.LoadedBehavior = System.Windows.Controls.MediaState.Manual;
+            this.medPlayer.Source = new Uri(currentList.getPathByName(tmp));
+            this.medPlayer.SpeedRatio = 1;
+            this.medPlayer.Play();
+            this.isPlaying = true;
+            this.medPlayer.Volume = 0.5;
         }
     }
 }

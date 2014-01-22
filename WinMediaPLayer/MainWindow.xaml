@@ -230,7 +230,7 @@
                  IsSynchronizedWithCurrentItem="True"
                  Drop="dropElement"
                  AllowDrop="True"
-                 Grid.Column="1">
+                 Grid.Column="1" MouseDoubleClick="currentPlaylist_MouseDoubleClick">
             <ListBox.Background>
                 <ImageBrush x:Name="plBgImage" ImageSource="Resources/playlist.png"/>
             </ListBox.Background>

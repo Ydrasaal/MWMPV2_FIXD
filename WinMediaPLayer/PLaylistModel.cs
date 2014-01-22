@@ -47,5 +47,12 @@ namespace WinMediaPLayer.Models
             }
             return tmp;
         }
+
+        public String getPathByName(String fileName)
+        {
+            int index = this.getNameList().IndexOf(fileName);
+            String tmp = this.playList[index];
+            return tmp;
+        }
     }
 }
