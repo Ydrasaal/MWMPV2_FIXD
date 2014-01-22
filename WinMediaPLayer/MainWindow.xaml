@@ -41,11 +41,13 @@
                 <MenuItem x:Name="UpVolume"
                           Header="Monter son"
                           Height="25"
-                          Width="Auto"/>
+                          Width="Auto"
+                          Click="UpVolume_Click"/>
                 <MenuItem x:Name="LowVolume"
                           Header="Baisser son"
                           Height="25"
-                          Width="Auto"/>
+                          Width="Auto"
+                          Click="LowVolume_Click"/>
             </MenuItem>
             <MenuItem Header="Playlists" Height="25" Width="Auto">
                 <MenuItem x:Name="newPlaylist"
@@ -125,7 +127,8 @@
                     Width="50"
                     Height="50"
                     ToolTip="Stop"
-                    Grid.Column="2">
+                    Grid.Column="2"
+                    Click="StopButton_Click">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Source="Resources/stop.png"/>

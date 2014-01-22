@@ -200,17 +200,7 @@ namespace WinMediaPLayer
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void RawUpSoundButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void RawDownSoundButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            File.WriteAllLines(".pli", this.currentList.getPlayList());
         }
 
         private void currentPlaylist_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -222,6 +212,34 @@ namespace WinMediaPLayer
             this.medPlayer.Play();
             this.isPlaying = true;
             this.medPlayer.Volume = 0.5;
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.isPlaying)
+            {
+                this.medPlayer.Stop();
+                PlayButton.IsChecked = false;
+                this.isPlaying = false;
+            }
+        }
+
+        private void UpVolume_Click(object sender, RoutedEventArgs e)
+        {
+            this.medPlayer.Volume += 0.1;
+            if (this.medPlayer.Volume > 0.95)
+            {
+                this.medPlayer.Volume = 0.95;
+            }
+        }
+
+        private void LowVolume_Click(object sender, RoutedEventArgs e)
+        {
+            this.medPlayer.Volume -= 0.1;
+            if (this.medPlayer.Volume > 0.05)
+            {
+                this.medPlayer.Volume = 0.05;
+            }
         }
     }
 }
