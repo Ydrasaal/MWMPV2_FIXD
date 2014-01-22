@@ -65,16 +65,7 @@
                           Width="Auto"
                           Click="SaveButton_Click"/>
             </MenuItem>
-            <MenuItem Header="?" Height="25" Width="Auto">
-                <MenuItem x:Name="help"
-                              Header="Aide"
-                              Height="25"
-                              Width="Auto"/>
-                <MenuItem x:Name="about"
-                              Header="A propos"
-                              Height="25"
-                              Width="Auto"/>
-            </MenuItem>
+            <MenuItem Header="?" Height="25" Width="Auto" Click="About_Click"/>
         </Menu>
 
         <MediaElement x:Name="medPlayer"

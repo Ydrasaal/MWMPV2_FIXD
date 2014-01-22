@@ -24,12 +24,45 @@ namespace WinMediaPLayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string[] ext = null;
+        private List<string> list;
         private bool isPlaying = false;
         private PlaylistModel currentList = new PlaylistModel();
 
         public MainWindow()
         {
             InitializeComponent();
+            this.ext = new string[] { ".mpg", ".avi", ".wma", ".mov", ".wav", ".mp2", ".mp3", ".mp4", ".wmv", ".jpg", ".png", ".jpeg" };
+            this.loadLibrary();
+        }
+
+        private void loadLibrary()
+        {
+            this.list = new List<string>();
+            DirectoryInfo di = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
+            string path = di.FullName.Replace(di.Name, "Music");
+            var results = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => ext.Any(x => s.EndsWith(x)));
+            foreach (string s in results)
+            {
+                list.Add(s);
+            }
+            path = di.FullName.Replace(di.Name, "Videos");
+            results = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => ext.Any(x => s.EndsWith(x)));
+            foreach (string s in results)
+            {
+                list.Add(s);
+            }
+            path = di.FullName.Replace(di.Name, "Pictures");
+            results = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => ext.Any(x => s.EndsWith(x)));
+            foreach (string s in results)
+            {
+                list.Add(s);
+            }
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Des questions ? Contactez-nous via lorollatek@gmail.com !");
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
